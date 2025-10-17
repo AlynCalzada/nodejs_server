@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plantas y Flores - Tu Jardín Perfecto</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            background-color: #f5f9f0;
+            color: #333;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2e7d32, #4caf50);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav {
+            background-color: #1b5e20;
+            padding: 1rem 0;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav a:hover {
+            color: #a5d6a7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .intro h2 {
+            color: #2e7d32;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .intro p {
+            font-size: 1.2rem;
+            color: #555;
+        }
+
+        .plants-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .plant-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .plant-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .plant-image {
+            height: 250px;
+            background-color: #e8f5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .plant-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .plant-card:hover .plant-image img {
+            transform: scale(1.05);
+        }
+
+        .placeholder-text {
+            color: #81c784;
+            font-size: 1rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .placeholder-icon {
+            font-size: 3rem;
+            color: #a5d6a7;
+            margin-bottom: 10px;
+        }
+
+        .plant-info {
+            padding: 1.5rem;
+        }
+
+        .plant-info h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .plant-details {
+            margin-bottom: 1rem;
+        }
+
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        .detail-value {
+            color: #333;
+        }
+
+        .care-tips {
+            background-color: #e8f5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .care-tips h4 {
+            color: #1b5e20;
+            margin-bottom: 0.5rem;
+        }
+
+        .category-section {
+            margin: 4rem 0;
+        }
+
+        .category-title {
+            text-align: center;
+            color: #2e7d32;
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #4caf50;
+        }
+
+        .seasonal-plants {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            padding: 3rem;
+            border-radius: 15px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .seasonal-plants h2 {
+            color: #1b5e20;
+            margin-bottom: 2rem;
+        }
+
+        .footer {
+            background-color: #1b5e20;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #4caf50;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #2e7d32;
+        }
+
+        @media (max-width: 768px) {
+            .nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            .plants-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .plant-image {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>🌷 Plantas y Flores</h1>
+        <p>Descubre el maravilloso mundo de la flora para tu jardín</p>
+    </header>
+
+    <nav class="nav">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index2.html">Consejos</a></li>
+            <li><a href="plantas.html">Plantas y Flores</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section class="intro">
+            <h2>🌿 Nuestra Colección de Plantas y Flores</h2>
+            <p>Explora diferentes especies y encuentra las perfectas para tu espacio verde</p>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">🌸 Flores Anuales</h2>
+            <div class="plants-grid">
+                <div class="plant-card">
+                    <div class="plant-image" style="background-color: #FFEBEE;">
+                        <img src="images/petunia.jpeg" alt="Petunia">
+                    </div>
+                    <div class="plant-info">
+                        <h3>Petunia</h3>
+                        <div class="plant-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Tipo:</span>
+                                <span class="detail-value">Anual</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Luz:</span>
+                                <span class="detail-value">Sol pleno</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Riego:</span>
+                                <span class="detail-value">Moderado</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Floración:</span>
+                                <span class="detail-value">Primavera-Verano</span>
+                            </div>
+                        </div>
+                        <div class="care-tips">
+                            <h4>💡 Cuidados Especiales</h4>
+                            <p>Deadhead regularmente para promover más floración. Fertilizar cada 2 semanas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card">
+                    <div class="plant-image" style="background-color: #FFF3E0;">
+                        <img src="images/calendula.jpg" alt="Caléndula">
+                    </div>
+                    <div class="plant-info">
+                        <h3>Caléndula</h3>
+                        <div class="plant-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Tipo:</span>
+                                <span class="detail-value">Anual</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Luz:</span>
+                                <span class="detail-value">Sol parcial</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Riego:</span>
+                                <span class="detail-value">Bajo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Floración:</span>
+                                <span class="detail-value">Todo el año</span>
+                            </div>
+                        </div>
+                        <div class="care-tips">
+                            <h4>💡 Cuidados Especiales</h4>
+                            <p>Resistente y fácil de cultivar. Atrae polinizadores al jardín.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">🌿 Plantas Perennes</h2>
+            <div class="plants-grid">
+                <div class="plant-card">
+                    <div class="plant-image" style="background-color: #F3E5F5;">
+                        <img src="images/rosa.jpeg" alt="Rosa">
+                    </div>
+                    <div class="plant-info">
+                        <h3>Rosa</h3>
+                        <div class="plant-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Tipo:</span>
+                                <span class="detail-value">Perenne</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Luz:</span>
+                                <span class="detail-value">Sol pleno</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Riego:</span>
+                                <span class="detail-value">Regular</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Floración:</span>
+                                <span class="detail-value">Primavera-Otoño</span>
+                            </div>
+                        </div>
+                        <div class="care-tips">
+                            <h4>💡 Cuidados Especiales</h4>
+                            <p>Poda anual necesaria. Proteger de enfermedades fúngicas.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card">
+                    <div class="plant-image" style="background-color: #E8F5E8;">
+                        <img src="images/lavanda.jpg" alt="Lavanda">
+                    </div>
+                    <div class="plant-info">
+                        <h3>Lavanda</h3>
+                        <div class="plant-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Tipo:</span>
+                                <span class="detail-value">Perenne</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Luz:</span>
+                                <span class="detail-value">Sol pleno</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Riego:</span>
+                                <span class="detail-value">Bajo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Floración:</span>
+                                <span class="detail-value">Verano</span>
+                            </div>
+                        </div>
+                        <div class="care-tips">
+                            <h4>💡 Cuidados Especiales</h4>
+                            <p>Suelo bien drenado. Poda después de la floración. Aromática y medicinal.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-section">
+            <h2 class="category-title">🌱 Plantas de Interior</h2>
+            <div class="plants-grid">
+                <div class="plant-card">
+                    <div class="plant-image" style="background-color: #E0F2F1;">
+                        <img src="images/potus.jpg" alt="Potus">
+                    </div>
+                    <div class="plant-info">
+                        <h3>Potus</h3>
+                        <div class="plant-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Tipo:</span>
+                                <span class="detail-value">Interior</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Luz:</span>
+                                <span class="detail-value">Sombra parcial</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Riego:</span>
+                                <span class="detail-value">Moderado</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Crecimiento:</span>
+                                <span class="detail-value">Rápido</span>
+                            </div>
+                        </div>
+                        <div class="care-tips">
+                            <h4>💡 Cuidados Especiales</h4>
+                            <p>Purifica el aire. Muy resistente. Ideal para principiantes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="plant-card">
+                    <div class="plant-image" style="background-color: #F1F8E9;">
+                        <img src="images/suculentas.jpg" alt="Suculentas">
+                    </div>
+                    <div class="plant-info">
+                        <h3>Suculentas</h3>
+                        <div class="plant-details">
+                            <div class="detail-item">
+                                <span class="detail-label">Tipo:</span>
+                                <span class="detail-value">Interior/Exterior</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Luz:</span>
+                                <span class="detail-value">Sol indirecto</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Riego:</span>
+                                <span class="detail-value">Muy bajo</span>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-label">Mantenimiento:</span>
+                                <span class="detail-value">Bajo</span>
+                            </div>
+                        </div>
+                        <div class="care-tips">
+                            <h4>💡 Cuidados Especiales</h4>
+                            <p>Evitar exceso de agua. Suelo arenoso. Perfectas para oficinas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+    </main>
+
+    <footer class="footer">
+        <p>🌷¡Síguenos para más consejos de jardinería!</p>
+        
+    </footer>
+</body>
+</html>
